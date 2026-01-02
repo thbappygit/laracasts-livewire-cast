@@ -13,7 +13,7 @@
 
                     <input
                         type="text"
-                        placeholder="Search by title..."
+                        placeholder="{{$placeholder}}"
                         wire:model.live.debounce="searchText"
                         class="w-full pl-10 pr-3 py-2 border rounded-lg
                                focus:outline-none focus:ring-2 focus:ring-indigo-500
@@ -33,19 +33,9 @@
             </div>
         </form>
 
-        <!-- Results -->
-        <div class="mt-6 divide-y">
-            @forelse($searchResults as $result)
-                <div class="py-3 hover:bg-gray-50 px-2 rounded transition">
-                    <a href="/articles/{{$result->id}}" class="text-gray-800 font-medium">
-                        {{ $result->title }}
-                    </a>
-                </div>
-            @empty
-                <div class="py-6 text-center text-gray-400">
-                    No results found
-                </div>
-            @endforelse
-        </div>
+
+
+        <livewire:search-result :searchResults="$searchResults" :show="!empty($searchText)"/>
+
     </div>
 </div>

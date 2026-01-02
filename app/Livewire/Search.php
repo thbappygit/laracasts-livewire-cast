@@ -12,6 +12,8 @@ class Search extends Component
     public $searchText = '';
     public $searchResults = [];
 
+    public $placeholder;
+
 
     public function render()
     {
