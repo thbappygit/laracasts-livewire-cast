@@ -37,9 +37,9 @@
         <div class="mt-6 divide-y">
             @forelse($searchResults as $result)
                 <div class="py-3 hover:bg-gray-50 px-2 rounded transition">
-                    <p class="text-gray-800 font-medium">
+                    <a href="/articles/{{$result->id}}" class="text-gray-800 font-medium">
                         {{ $result->title }}
-                    </p>
+                    </a>
                 </div>
             @empty
                 <div class="py-6 text-center text-gray-400">
