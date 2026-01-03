@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Article;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
@@ -13,6 +14,8 @@ class Search extends Component
     public $searchResults = [];
 
     public $placeholder;
+
+    public  string $showHello = '';
 
 
     public function render()
@@ -29,8 +32,17 @@ class Search extends Component
 
     }
 
+
     public function clear(): void
     {
         $this->reset('searchText', 'searchResults');
+    }
+
+
+    #[On('hello-from:search-result')]
+    public function showHelloText(): void
+    {
+        $this->showHello = "Hello Vaiya";
+
     }
 }

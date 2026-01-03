@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use Livewire\Attributes\On;
 use Livewire\Attributes\Reactive;
 use Livewire\Component;
 
@@ -14,8 +15,16 @@ class SearchResult extends Component
     #[Reactive]
     public $show = [];
 
+
+
     public function render()
     {
         return view('livewire.search-result');
+    }
+
+
+    public function hello(): void
+    {
+        $this->dispatch("hello-from:search-result");
     }
 }

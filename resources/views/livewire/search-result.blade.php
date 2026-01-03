@@ -6,6 +6,12 @@
                 <a href="/articles/{{$result->id}}" class="text-gray-800 font-medium">
                     {{ $result->title }}
                 </a>
+
+                <button wire:click="hello"
+                    class="text-gray-100 bg-blue-700 rounded-full ring-1 ring-fuchsia-500
+                             font-medium block truncate hover:text-gray-200 px-2 py-1 transition">
+                    Click me For event
+                </button>
             </div>
         @empty
             <div class="py-6 text-center text-gray-400">
