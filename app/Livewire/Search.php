@@ -33,6 +33,7 @@ class Search extends Component
     }
 
 
+    #[On('cross:close-search')]
     public function clear(): void
     {
         $this->reset('searchText', 'searchResults');

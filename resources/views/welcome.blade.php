@@ -54,7 +54,7 @@
             <main class="mt-6">
 
 {{--                <livewire:greeter/>--}}
-                <livewire:search/>
+{{--                <livewire:search/>--}}
             </main>
 
 
