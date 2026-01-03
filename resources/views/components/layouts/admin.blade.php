@@ -9,10 +9,14 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
 
-
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- Styles / Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <!-- Additional head content from components -->
+    @stack('head')
 </head>
 
 <body class="min-h-screen flex flex-col">
@@ -24,21 +28,15 @@
 
             <!-- LEFT: NAV -->
             <nav class="flex items-center space-x-6">
-                <a wire:navigate href="{{ url('/') }}"
-                   class="text-blue-500 font-medium hover:text-blue-400 transition">
-                    Home
-                </a>
-
-                <a wire:navigate href="{{ route('dashboard')  }}"
+                <a wire:navigate href="{{ route('dashboard') }}"
                    class="text-blue-500 font-medium hover:text-blue-400 transition">
                     Dashboard
                 </a>
+                <a wire:navigate href="/dashboard/articles"
+                   class="text-blue-500 font-medium hover:text-blue-400 transition">
+                    Articles Manager
+                </a>
             </nav>
-
-            <!-- RIGHT: SEARCH -->
-            <div class="w-full max-w-sm">
-                <livewire:search placeholder="Type something to search" />
-            </div>
 
         </div>
     </div>
@@ -49,5 +47,9 @@
     {{ $slot }}
 </main>
 
+<!-- Additional scripts from components -->
+@stack('scripts')
+
 </body>
 </html>
+``_
