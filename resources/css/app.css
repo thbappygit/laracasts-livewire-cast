@@ -1,3 +1,4 @@
+@import './theme.css'; /* By Sheaf.dev */ 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,3 +6,6 @@
 [x-cloak] {
     display: none;
 }
+
+
+ @custom-variant dark (&:where(.dark, .dark *)); /* By Sheaf.dev */ 

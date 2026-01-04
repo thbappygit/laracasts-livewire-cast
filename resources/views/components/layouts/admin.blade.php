@@ -15,6 +15,7 @@
     <!-- Styles / Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+    @livewireStyles
     <!-- Additional head content from components -->
     @stack('head')
 </head>
@@ -47,6 +48,8 @@
     {{ $slot }}
 </main>
 
+
+@livewireScripts
 <!-- Additional scripts from components -->
 @stack('scripts')
 

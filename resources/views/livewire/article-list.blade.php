@@ -1,9 +1,21 @@
 <div class="mx-auto w-1/2 lg:w-3/4 mb-6 overflow-x-auto">
+
+    <div class="mt-3 mb-2">
+        <a  wire:navigate href="{{route('dashboard.articles.create')}}"
+            class="px-6 py-2 active:scale-95 transition bg-blue-500 rounded text-white text-sm font-medium">
+
+            Create Article
+        </a>
+
+
+    </div>
+
+
     <table class="min-w-full border border-gray-300 rounded-lg overflow-hidden shadow-sm">
 
         <!-- Table Head -->
         <thead>
-        <tr class="bg-gray-900">
+        <tr class="bg-gray-700 text-white">
             <th class="px-6 py-3 text-left text-xs font-semibold  uppercase">
                 ID
             </th>
@@ -35,7 +47,7 @@
 
                         <!-- Edit -->
                         <a wire:navigate
-                           href="/dashboard/articles/edit/{{ $article->id }}"
+                           href="/dashboard/articles/{{ $article->id }}/edit"
                            class="text-blue-600 hover:text-blue-800 transition"
                            title="Edit">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
