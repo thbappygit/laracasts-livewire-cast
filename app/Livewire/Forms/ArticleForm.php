@@ -10,30 +10,35 @@ class ArticleForm extends Form
 {
     public ?Article $article;
 
+    public $notification = 'none';
+    public $published = true;
+
     #[Validate('required|min:2')]
     public $title;
     #[Validate('required|min:2')]
     public $content;
 
 
-    public function setArticle(Article $article)
+    public function setArticle(Article $article): void
     {
         $this->title = $article->title;
         $this->content = $article->content;
+        $this->published = $article->published;
+        $this->notification = $article->notification;
         $this->article = $article;
     }
 
 
-    public function store()
+    public function store(): void
     {
         $this->validate();
-        Article::create($this->only(['title', 'content']));
+        Article::create($this->only(['title', 'content','published','notification']));
     }
 
-    public function update()
+    public function update(): void
     {
         $this->validate();
-        $this->article->update($this->only(['title', 'content']));
+        $this->article->update($this->only(['title', 'content','published','notification']));
 
     }
 }

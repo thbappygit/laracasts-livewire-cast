@@ -20,6 +20,39 @@
             @error('content') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
         </div>
 
+
+
+        {{--        publish status--}}
+        <div class=" mb-4">
+            <input wire:model.boolean="articleForm.published"  type="checkbox" class="w-4 h-4 border border-default-medium rounded-xs bg-neutral-secondary-medium focus:ring-2 focus:ring-brand-soft">
+            <label for="default-checkbox" class="select-none ms-2 text-sm font-medium text-heading">Published</label>
+        </div>
+
+        <div class="mb-4">
+
+            <div>
+                <div class="mb-2">Notification Options</div>
+                <div class="flex gap-6">
+                    <label class="flex items-center">
+                        <input type="radio" value="email" class="mr-2" wire:model="articleForm.notification">
+                        Email
+                    </label>
+
+                    <label class="flex items-center">
+                        <input type="radio" value="sms" class="mr-2" wire:model="articleForm.notification">
+                        SMS
+                    </label>
+
+                    <label class="flex items-center">
+                        <input type="radio" value="none" class="mr-2" wire:model="articleForm.notification">
+                        None
+                    </label>
+                </div>
+            </div>
+
+
+        </div>
+
         <!-- Submit Button -->
         <div class="flex justify-end">
             <button
