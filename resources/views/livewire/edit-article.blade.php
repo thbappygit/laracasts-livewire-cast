@@ -4,7 +4,9 @@
 
         <!-- Title Field -->
         <div class="mb-4">
-            <label for="title" class="block text-gray-700 font-medium mb-2">Title</label>
+            <label wire:dirty.class="text-orange-500" wire:target="articleForm.title" for="title" class="block text-gray-700 font-medium mb-2">
+                Title <span wire:dirty wire:target="articleForm.title">*</span>
+            </label>
             <input type="text" id="title" wire:model="articleForm.title"
                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                    placeholder="Enter article title">
@@ -13,7 +15,11 @@
 
         <!-- Content Field -->
         <div class="mb-4">
-            <label for="content" class="block text-gray-700 font-medium mb-2">Content</label>
+            <label for="content" class="block text-gray-700 font-medium mb-2" wire:dirty.class="text-orange-500"
+                   wire:target="articleForm.content">
+                Content <span wire:dirty wire:target="articleForm.content">*</span>
+
+            </label>
             <textarea id="content" wire:model="articleForm.content" rows="6"
                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                       placeholder="Enter article content"></textarea>
@@ -25,13 +31,15 @@
         {{--        publish status--}}
         <div class=" mb-4">
             <input wire:model.boolean="articleForm.published"  type="checkbox" class="w-4 h-4 border border-default-medium rounded-xs bg-neutral-secondary-medium focus:ring-2 focus:ring-brand-soft">
-            <label for="default-checkbox" class="select-none ms-2 text-sm font-medium text-heading">Published</label>
+            <label for="default-checkbox" class="select-none ms-2 text-sm font-medium text-heading" wire:dirty.class="text-orange-500" wire:target="articleForm.published">
+                Published <span wire:dirty wire:target="articleForm.published">*</span>
+            </label>
         </div>
 
         <div class="mb-4">
 
             <div>
-                <div class="mb-2">Notification Options</div>
+                <div wire:dirty.class="text-orange-500" wire:target="articleForm.notification" class="mb-2">Notification Options <span wire:dirty wire:target="articleForm.notification">*</span></div>
                 <div class="flex gap-6">
                     <label class="flex items-center">
                         <input type="radio" value="email" class="mr-2" wire:model="articleForm.notification">
@@ -55,9 +63,10 @@
 
         <!-- Submit Button -->
         <div class="flex justify-end">
-            <button
+            <button disabled
                 type="submit"
-                wire:loading.attr="disabled"
+                    wire:dirty.class="hover:bg-gray-700"
+                wire:dirty.remove.attr="disabled"
                 class="bg-gray-950 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition flex items-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
             >
                 <!-- Spinner -->
@@ -93,6 +102,7 @@
         </span>
             </button>
         </div>
+
 
     </form>
 
