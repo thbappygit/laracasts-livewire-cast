@@ -17,6 +17,7 @@ class CreateArticle extends AdminComponent
     public function save(): void
     {
         $this->form->store();
+        session()->flash('success', 'Article created successfully.');
         $this->redirect(route('dashboard.articles'), navigate: true);
     }
 

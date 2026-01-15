@@ -21,6 +21,7 @@ class EditArticle extends AdminComponent
     public function save()
     {
         $this->articleForm->update();
+        session()->flash('success', 'Article updated successfully.');
         $this->redirect(route('dashboard.articles'), navigate: true);
     }
 

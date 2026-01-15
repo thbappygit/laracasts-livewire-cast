@@ -12,6 +12,8 @@ class ArticleList extends AdminComponent
 {
     use WithPagination;
 
+    protected $paginationTheme = 'tailwind';
+
     public $showOnlyPublished = false;
 
 
@@ -39,8 +41,14 @@ class ArticleList extends AdminComponent
         ]);
     }
 
-    public function delete(Article $article): void
+    public function delete(int $id): void
     {
-        $article->delete();
+        try {
+            $article = Article::findOrFail($id);
+            $article->delete();
+            $this->dispatch('notify', type: 'success', message: 'Article deleted successfully.');
+        } catch (\Throwable $e) {
+            $this->dispatch('notify', type: 'error', message: 'Failed to delete article.');
+        }
     }
 }
