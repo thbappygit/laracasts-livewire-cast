@@ -55,21 +55,35 @@
                     <td class="px-6 py-4 text-sm font-medium text-gray-700">{{ $article->id }}</td>
                     <td class="px-6 py-4 text-sm text-gray-800">{{ $article->title }}</td>
                     <td class="px-6 py-4 text-center">
-                        <div class="flex justify-center gap-4">
-                            <!-- Edit -->
-                            <a wire:navigate href="/dashboard/articles/{{ $article->id }}/edit" class="text-blue-600 hover:text-blue-800 transition" title="Edit">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536M9 11l6-6 3 3-6 6H9v-3z" />
-                                </svg>
-                            </a>
-                            <!-- Delete with modal trigger -->
-                            <button @click.prevent="selectedId={{ $article->id }}; modalOpen=true" class="text-red-600 hover:text-red-800 transition" title="Delete">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        <div class="relative inline-block text-left" x-data="{ open: false }">
+                            <!-- Ellipsis button -->
+                            <button
+                                @click="open = !open"
+                                @click.outside="open = false"
+                                class="inline-flex items-center justify-center rounded-full p-2
+                   text-gray-600 hover:bg-gray-100 hover:text-gray-800 transition"
+                                title="Actions"
+                            >
+                                <!-- Heroicon: ellipsis-vertical -->
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
+                                     viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M10 3a1.5 1.5 0 110 3 1.5 1.5 0 010-3zm0 5.5a1.5 1.5 0 110 3 1.5 1.5 0 010-3zm0 5.5a1.5 1.5 0 110 3 1.5 1.5 0 010-3z"/>
                                 </svg>
                             </button>
+
+                            <!-- Dropdown -->
+                            <div x-show="open" x-transition.opacity.scale.origin.top.right x-cloak class="absolute right-0 z-20 mt-2 w-36 origin-top-right rounded-md bg-white border border-gray-200 shadow-lg">
+                                <a wire:navigate href="/dashboard/articles/{{ $article->id }}/edit" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    ✏️ Edit
+                                </a>
+
+                                <button @click="open=false; selectedId={{ $article->id }}; modalOpen=true" class="flex w-full items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50">
+                                    🗑 Delete
+                                </button>
+                            </div>
                         </div>
                     </td>
+
                 </tr>
             @endforeach
             </tbody>
