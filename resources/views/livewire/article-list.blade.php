@@ -1,11 +1,24 @@
 <div class="mx-auto w-1/2 lg:w-3/4 mb-6 overflow-x-auto">
 
-    <div class="mt-3 mb-2">
+    <div class="mt-3 mb-2 flex justify-between items-end">
         <a  wire:navigate href="{{route('dashboard.articles.create')}}"
-            class="px-6 py-2 active:scale-95 transition bg-blue-500 rounded text-white text-sm font-medium">
+            class=" nline-flex items-center justify-center px-4 py-2 text-sm font-medium tracking-wide text-white transition-colors duration-200 bg-green-600 rounded-md hover:bg-green-700 focus:ring-2 focus:ring-offset-2 focus:ring-green-700 focus:shadow-outline focus:outline-none">
 
             Create Article
         </a>
+
+
+        <div>
+            <button wire:click="showAll" type="button" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium tracking-wide text-white transition-colors duration-200 rounded-md bg-neutral-950 hover:bg-neutral-900 focus:ring-2 focus:ring-offset-2 focus:ring-neutral-900 focus:shadow-outline focus:outline-none">
+                Show All
+            </button>
+
+            <button wire:click="showPublished" type="button" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium tracking-wide text-white transition-colors duration-200 bg-blue-600 rounded-md hover:bg-blue-700 focus:ring-2 focus:ring-offset-2 focus:ring-blue-700 focus:shadow-outline focus:outline-none">
+                Show Published:  <livewire:published-count placeholder-text=" Counting.."/>
+            </button>
+        </div>
+
+
 
 
     </div>
@@ -73,4 +86,9 @@
         @endforeach
         </tbody>
     </table>
+
+ <div class="mt-3">
+     {{$articles->links(data:['scrollTo'=> false])}}
+ </div>
+
 </div>
