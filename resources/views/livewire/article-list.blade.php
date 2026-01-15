@@ -90,9 +90,12 @@
         </table>
     </div>
 
-    <div class="mt-3">
-        {{ $articles->links(data: ['scrollTo' => false]) }}
+    <div class="mt-4">
+        <div class="rounded-lg bg-white border border-gray-200 shadow-sm px-3 py-2">
+            {{ $articles->links(data: ['scrollTo' => false]) }}
+        </div>
     </div>
+
 
     <!-- Toasts -->
     <div class="fixed top-4 right-4 z-[100] space-y-2" aria-live="assertive">
