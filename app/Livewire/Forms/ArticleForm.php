@@ -33,12 +33,15 @@ class ArticleForm extends Form
     {
         $this->validate();
         Article::create($this->only(['title', 'content','published','notification']));
+        cache()->forget('count-published-articles');
+
     }
 
     public function update(): void
     {
         $this->validate();
         $this->article->update($this->only(['title', 'content','published','notification']));
+        cache()->forget('count-published-articles');
 
     }
 }

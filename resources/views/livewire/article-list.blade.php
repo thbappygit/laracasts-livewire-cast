@@ -62,7 +62,7 @@
             </tr>
             </thead>
             <tbody class="divide-y divide-gray-200">
-            @foreach($articles as $article)
+            @foreach($this->articles as $article)
                 <tr wire:key="{{ $article->id }}" class="hover:bg-gray-50 transition-colors">
                     <td class="px-6 py-4 text-sm font-medium text-gray-700">{{ $article->id }}</td>
                     <td class="px-6 py-4 text-sm text-gray-800">{{ $article->title }}</td>
@@ -104,7 +104,7 @@
 
     <div class="mt-4">
         <div class="rounded-lg bg-white border border-gray-200 shadow-sm px-3 py-2">
-            {{ $articles->links(data: ['scrollTo' => false]) }}
+            {{ $this->articles->links(data: ['scrollTo' => false]) }}
         </div>
     </div>
 

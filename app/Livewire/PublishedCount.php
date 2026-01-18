@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Article;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\Lazy;
 use Livewire\Component;
 use function Symfony\Component\Translation\t;
@@ -10,13 +11,14 @@ use function Symfony\Component\Translation\t;
 #[Lazy]
 class PublishedCount extends Component
 {
-    public $count = 0;
+
 
     public $placeholderText = '';
 
-    public function mount(): void
+    #[Computed(cache: true,key: 'count-published-articles')]
+    public function count()
     {
-        $this->count = Article::where('published', 1)->count();
+         return Article::where('published', 1)->count();
     }
 
     public function placeholder()

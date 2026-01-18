@@ -29,6 +29,10 @@
 
             <!-- LEFT: NAV -->
             <nav class="flex items-center space-x-6">
+                <a wire:navigate href="{{ url('/') }}"
+                   class="text-blue-500 font-medium hover:text-blue-400 transition">
+                    Home
+                </a>
                 <a wire:navigate href="{{ route('dashboard') }}"
                    class="text-blue-500 font-medium hover:text-blue-400 transition">
                     Dashboard
