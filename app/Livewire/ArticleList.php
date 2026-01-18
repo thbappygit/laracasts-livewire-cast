@@ -21,7 +21,7 @@ class ArticleList extends AdminComponent
 
     public string $search = '';
 
-    #[Computed()]
+    #[Computed]
     public function articles()
     {
         $query = Article::query();
@@ -40,17 +40,10 @@ class ArticleList extends AdminComponent
     }
 
 
-    public function showAll(): void
+    public function togglePublished($showOnlyPublished): void
     {
-        $this->showOnlyPublished = false;
+        $this->showOnlyPublished = $showOnlyPublished;
         $this->resetPage(pageName: 'article-page');
-    }
-
-    public function showPublished(): void
-    {
-        $this->showOnlyPublished = true;
-        $this->resetPage(pageName: 'article-page');
-
     }
 
     public function updatedSearch(): void

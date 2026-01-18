@@ -42,10 +42,20 @@
                 </div>
             </div>
 
-            <button wire:click="showAll" type="button" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium tracking-wide text-white transition-colors duration-200 rounded-md bg-neutral-900 hover:bg-neutral-800 focus:ring-2 focus:ring-offset-2 focus:ring-neutral-900 focus:outline-none">
+            <button wire:click="togglePublished(false)" type="button" @class([
+                "inline-flex items-center justify-center px-4 py-2 text-sm font-medium tracking-wide text-white transition-colors duration-200 rounded-md",
+
+                  'bg-neutral-900 hover:bg-neutral-800 focus:ring-2 focus:ring-offset-2 focus:ring-neutral-900 focus:outline-none' => $showOnlyPublished,
+                  'bg-blue-600 rounded-md hover:bg-blue-700 focus:ring-2 focus:ring-offset-2 focus:ring-blue-700 focus:outline-none' => !$showOnlyPublished
+])>
                 Show All
             </button>
-            <button wire:click="showPublished" type="button" class="inline-flex items-center justify-center px-4 py-2 text-sm font-medium tracking-wide text-white transition-colors duration-200 bg-blue-600 rounded-md hover:bg-blue-700 focus:ring-2 focus:ring-offset-2 focus:ring-blue-700 focus:outline-none">
+            <button wire:click="togglePublished(true)" type="button" @class([
+                "inline-flex items-center justify-center px-4 py-2 text-sm font-medium tracking-wide text-white transition-colors duration-200 rounded-md",
+
+                  'bg-neutral-900 hover:bg-neutral-800 focus:ring-2 focus:ring-offset-2 focus:ring-neutral-900 focus:outline-none' => !$showOnlyPublished,
+                  'bg-blue-600 rounded-md hover:bg-blue-700 focus:ring-2 focus:ring-offset-2 focus:ring-blue-700 focus:outline-none' => $showOnlyPublished
+])>
                 Show Published: <livewire:published-count placeholder-text=" Counting.."/>
             </button>
         </div>
