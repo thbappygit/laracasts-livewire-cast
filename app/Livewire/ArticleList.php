@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Article;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -83,5 +84,24 @@ class ArticleList extends AdminComponent
         } catch (\Throwable $e) {
             $this->dispatch('notify', type: 'error', message: 'Failed to delete article.');
         }
+    }
+
+    public function downloadImage(Article $article)
+    {
+        if (! $article->image_path) {
+            $this->dispatch('notify', type: 'error', message: 'No image to download.');
+            return null;
+        }
+
+        $disk = Storage::disk('public');
+        if (! $disk->exists($article->image_path)) {
+            $this->dispatch('notify', type: 'error', message: 'Image file not found.');
+            return null;
+        }
+
+        $path = $disk->path($article->image_path);
+        $filename = basename($article->image_path);
+
+        return response()->download($path, $filename);
     }
 }

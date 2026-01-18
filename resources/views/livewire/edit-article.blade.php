@@ -1,4 +1,12 @@
-<div>
+<div x-data="{
+    fileName: '',
+    previewUrl: null,
+    setFile(event) {
+        const [file] = event.target.files;
+        this.fileName = file ? file.name : '';
+        this.previewUrl = file ? URL.createObjectURL(file) : null;
+    }
+}">
     <form wire:submit="save" class="w-9/12 mx-auto bg-white p-6 rounded-lg shadow-md">
         <h2 class="text-2xl font-semibold mb-4">Edit Article</h2>
 
@@ -26,7 +34,35 @@
             @error('articleForm.content') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
         </div>
 
+        <!-- Image Upload -->
+        <div class="mb-6">
+            <label for="image" class="block text-gray-700 font-medium mb-2">Cover Image</label>
+            <div class="flex items-start gap-4">
+                <div class="w-32 h-32 rounded-md border bg-gray-50 flex items-center justify-center overflow-hidden">
+                    @if(optional($this->articleForm->article)->image_url)
+                        <img x-show="!previewUrl" src="{{ $this->articleForm->article->image_url }}" alt="Current Image" class="w-full h-full object-cover" />
+                    @else
+                        <div x-show="!previewUrl" class="text-gray-400 text-xs">No Image</div>
+                    @endif
+                    <template x-if="previewUrl">
+                        <img :src="previewUrl" alt="Preview" class="w-full h-full object-cover" />
+                    </template>
+                </div>
 
+                <div class="flex-1">
+                    <input id="image" type="file" accept="image/*"
+                           x-on:change="setFile($event)"
+                           wire:model="articleForm.image"
+                           class="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-gray-900 file:text-white hover:file:bg-gray-800 cursor-pointer" />
+                    <div class="mt-2 text-xs text-gray-500" x-text="fileName"></div>
+
+                    <div class="mt-2 text-sm text-gray-600" wire:loading wire:target="articleForm.image">
+                        Uploading... please wait
+                    </div>
+                    @error('articleForm.image') <span class="text-red-500 text-sm">{{ $message }}</span> @enderror
+                </div>
+            </div>
+        </div>
 
         {{--        publish status--}}
         <div class=" mb-4">
@@ -37,7 +73,6 @@
         </div>
 
         <div class="mb-4">
-
             <div>
                 <div wire:dirty.class="text-orange-500" wire:target="articleForm.notification" class="mb-2">Notification Options <span wire:dirty wire:target="articleForm.notification">*</span></div>
                 <div class="flex gap-6">
@@ -57,8 +92,6 @@
                     </label>
                 </div>
             </div>
-
-
         </div>
 
         <!-- Submit Button -->

@@ -67,6 +67,7 @@
             <thead>
             <tr class="bg-gray-800 text-white">
                 <th class="px-6 py-3 text-left text-xs font-semibold uppercase">ID</th>
+                <th class="px-6 py-3 text-left text-xs font-semibold uppercase">Image</th>
                 <th class="px-6 py-3 text-left text-xs font-semibold uppercase">Title</th>
                 <th class="px-6 py-3 text-center text-xs font-semibold uppercase">Actions</th>
             </tr>
@@ -75,6 +76,13 @@
             @foreach($this->articles as $article)
                 <tr wire:key="{{ $article->id }}" class="hover:bg-gray-50 transition-colors">
                     <td class="px-6 py-4 text-sm font-medium text-gray-700">{{ $article->id }}</td>
+                    <td class="px-6 py-4">
+                        @if($article->image_url)
+                            <img src="{{ $article->image_url }}" alt="Image" class="h-12 w-12 rounded object-cover ring-1 ring-gray-300"/>
+                        @else
+                            <div class="h-12 w-12 rounded bg-gray-100 text-gray-400 flex items-center justify-center text-xs">No</div>
+                        @endif
+                    </td>
                     <td class="px-6 py-4 text-sm text-gray-800">{{ $article->title }}</td>
                     <td class="px-6 py-4 text-center">
                         <div class="relative inline-block text-left" x-data="{ open: false }">
@@ -94,10 +102,16 @@
                             </button>
 
                             <!-- Dropdown -->
-                            <div x-show="open" x-transition.opacity.scale.origin.top.right x-cloak class="absolute right-0 z-20 mt-2 w-36 origin-top-right rounded-md bg-white border border-gray-200 shadow-lg">
+                            <div x-show="open" x-transition.opacity.scale.origin.top.right x-cloak class="absolute right-0 z-20 mt-2 w-44 origin-top-right rounded-md bg-white border border-gray-200 shadow-lg">
                                 <a wire:navigate href="/dashboard/articles/{{ $article->id }}/edit" class="flex items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                                     ✏️ Edit
                                 </a>
+
+                                @if($article->image_path)
+                                <button wire:click="downloadImage({{ $article->id }})" @click="open=false" class="flex w-full items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                    ⬇️ Download Image
+                                </button>
+                                @endif
 
                                 <button @click="open=false; selectedId={{ $article->id }}; modalOpen=true" class="flex w-full items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50">
                                     🗑 Delete
